@@ -21,7 +21,7 @@ export default function Footer() {
           © 2026 All Rights Reserved.
         </p>
         <p style={{ margin: 0, fontSize: 13, color: 'rgba(255,255,255,0.3)' }}>
-          Built with ❤️ using Angular, Spring Boot, React, and PostgreSQL.
+          Built using Spring Boot, React, and PostgreSQL.
         </p>
       </div>
     </footer>
