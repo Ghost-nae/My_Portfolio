@@ -35,7 +35,7 @@ export default function About() {
               full-featured admin dashboards.
             </p>
             <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.6)', lineHeight: 1.8, margin: 0 }}>
-              I bring a solid foundation in Software Testing including Manual Testing, API Testing
+              I bring a solid foundation in Software Testing including Manual Testing, Automation Testing, API Testing
               with Postman, Regression Testing, and Defect Reporting enabling me to deliver
               high-quality, production-ready software.
             </p>
