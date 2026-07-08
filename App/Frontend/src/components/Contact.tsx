@@ -47,12 +47,28 @@ const socials = [
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
   const [sent, setSent] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    setSent(true)
-    setTimeout(() => setSent(false), 4000)
-    setForm({ name: '', email: '', subject: '', message: '' })
+     try {
+        // TODO:
+        // POST /api/contact
+        // await fetch(...)
+
+        setSent(true)
+
+        setForm({
+            name: '',
+            email: '',
+            subject: '',
+            message: '',
+        })
+
+        setTimeout(() => setSent(false), 4000)
+    } catch (error) {
+        console.error(error)
+    }
   }
 
   return (
@@ -68,7 +84,7 @@ export default function Contact() {
             Get In Touch
           </h2>
           <p style={{ fontSize: 17, color: 'rgba(255,255,255,0.5)', margin: '0 0 52px', lineHeight: 1.6 }}>
-            Open to opportunities, collaborations, and interesting projects.
+            Open to full-time opportunities, freelance projects, and collaborations. I typically respond within 2 hours via email or WhatsApp.
           </p>
 
           <div className="glass-strong" style={{ padding: '48px' }}>
@@ -88,8 +104,12 @@ export default function Contact() {
                   onChange={(v) => setForm({ ...form, message: v })} required />
               </div>
 
-              <button type="submit" className="btn-primary" style={{ width: '100%', padding: '16px', fontSize: 16 }}>
-                {sent ? '✓ Message Sent!' : 'Send Message →'}
+              <button type="submit" className="btn-primary" disabled={loading} style={{ width: '100%', padding: '16px', fontSize: 16 }} >
+                {loading
+    ? 'Sending...'
+    : sent
+        ? '✓ Message Sent!'
+        : 'Send Message →'}
               </button>
             </form>
           </div>
