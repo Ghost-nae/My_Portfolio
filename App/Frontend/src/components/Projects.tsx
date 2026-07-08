@@ -2,6 +2,7 @@ const projects = [
   {
     title: 'Kalii Store',
     repo: 'Ghost-nae/Kalii-Store',
+    liveDemo: 'https://kalii-clothing-store.vercel.app/',
     description: 'A modern full-stack e-commerce clothing platform with secure user authentication, product browsing, shopping cart, inventory management, admin dashboard, and a secure checkout process.',
     tech: ['React', 'Spring Boot', 'PostgreSQL', 'Docker'],
     color: '#7c5bf5',
@@ -124,8 +125,16 @@ export default function Projects() {
                     </svg>
                     Repository
                   </a>
-                  <a href="#" className="btn-ghost"
-                    style={{ display: 'flex', alignItems: 'center', gap: 6, textDecoration: 'none', flex: 1, justifyContent: 'center' }}>
+                  <a href={p.liveDemo || '#'} target={p.liveDemo ? '_blank' : undefined} rel={p.liveDemo ? 'noopener noreferrer' : undefined}className="btn-ghost" style={{display: 'flex',
+    alignItems: 'center',
+    gap: 6,
+    textDecoration: 'none',
+    flex: 1,
+    justifyContent: 'center',
+    opacity: p.liveDemo ? 1 : 0.5,
+    pointerEvents: p.liveDemo ? 'auto' : 'none',
+  }}
+>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M10 6v2H5v11h11v-5h2v6a1 1 0 01-1 1H4a1 1 0 01-1-1V7a1 1 0 011-1h6zm11-3v8l-3.5-3.5-5 5-1.42-1.42 5-5L13 3h8z" />
                     </svg>
