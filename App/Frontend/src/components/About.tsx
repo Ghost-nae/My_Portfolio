@@ -2,7 +2,7 @@ const highlights = [
   'Enterprise Applications', 'RESTful APIs', 'Database-Driven Systems',
   'Responsive Web Apps', 'Authentication Systems', 'Admin Dashboards',
   'Full-Stack Solutions', 'Manual Testing', 'API Testing', 'Regression Testing',
-  'Agile Development', 'Clean Architecture',
+  'Agile Development', 'Clean Architecture', 'Automation Testing',
 ]
 
 export default function About() {
