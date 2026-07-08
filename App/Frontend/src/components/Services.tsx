@@ -4,7 +4,7 @@ const services = [
   { title: 'REST API Development', icon: '⚡', desc: 'Clean, documented RESTful API design' },
   { title: 'Database Design', icon: '🗄️', desc: 'Schema design, optimization, and migrations' },
   { title: 'Frontend Development', icon: '🎨', desc: 'Angular and React UI implementation' },
-  { title: 'Software Testing & QA', icon: '🧪', desc: 'Manual, regression, and API testing' },
+  { title: 'Software Testing & QA', icon: '🧪', desc: 'Manual, Automation, regression, and API testing' },
   { title: 'UI Development', icon: '✦', desc: 'Responsive, accessible user interfaces' },
   { title: 'Application Deployment', icon: '🚀', desc: 'Docker containerization and deployment' },
   { title: 'Software Maintenance', icon: '🔧', desc: 'Bug fixes, refactoring, and performance tuning' },
