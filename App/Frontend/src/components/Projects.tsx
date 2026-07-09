@@ -20,7 +20,7 @@ const projects = [
     title: 'ThriveCheck',
     repo: 'Ghost-nae/ThriveCheck',
     description: 'A health and wellness management platform enabling users to monitor personal health metrics, appointments, reports, and overall wellness through an intuitive dashboard.',
-    tech: ['Spring Boot', 'Angular', 'PostgreSQL'],
+    tech: ['Spring Boot', 'React', 'PostgreSQL'],
     color: '#22c55e',
     image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&h=300&fit=crop&auto=format',
   },
