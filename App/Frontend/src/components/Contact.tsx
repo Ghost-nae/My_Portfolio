@@ -22,7 +22,7 @@ const socials = [
     ),
   },
   {
-    label: 'Email', href: 'nkosinathinhlanhla4@gmail.com', color: '#ea4335',
+    label: 'Email', href: '#, color: '#ea4335',
     target: '_blank',
     rel: 'noopener noreferrer',
     icon: (
