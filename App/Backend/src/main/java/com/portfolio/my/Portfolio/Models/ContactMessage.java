@@ -1,35 +1,35 @@
 package com.portfolio.my.Portfolio.Models;
 
-import java.time.LocalDate;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "Message")
-@Getter
-@Setter
+@Table(name = "contact_messages")
+@Data
+@NoArgsConstructor
 @AllArgsConstructor
-public class ContactMessage{
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+public class ContactMessage {
 
-  @Column(nullable = false, unique = false)
-  private String fullname;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  @Column(nullable = false, unique = true)
-  private String email;
+    @Column(nullable = false, length = 100)
+    private String fullName;
 
-  @Column(nullable = false, unique = false)
-  private String subject;
+    @Column(nullable = false, length = 150)
+    private String email;
 
-  @Column(nullable = false)
-  private String message;
+    @Column(nullable = false, length = 150)
+    private String subject;
 
-  private LocalDate createdAt;
+    @Column(nullable = false, length = 5000)
+    private String message;
 
-  public ContactMessage() {}
-  
+    @Column(nullable = false)
+    private LocalDateTime createdDate;
 }
