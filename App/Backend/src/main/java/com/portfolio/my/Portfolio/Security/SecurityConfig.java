@@ -22,7 +22,9 @@ public class SecurityConfig {
     ) throws Exception {
 
         http
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                .cors(cors ->
+                        cors.configurationSource(corsConfigurationSource())
+                )
 
                 .csrf(AbstractHttpConfigurer::disable)
 
@@ -35,15 +37,31 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
 
                         // Public portfolio endpoints
-                        .requestMatchers(HttpMethod.GET, "/api/projects/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/skills/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/experience/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/education/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/services/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/expertise/**").permitAll()
+                        .requestMatchers(
+                                HttpMethod.GET,
+                                "/api/projects/**"
+                        ).permitAll()
+
+                        .requestMatchers(
+                                HttpMethod.GET,
+                                "/api/skills/**"
+                        ).permitAll()
+
+                        .requestMatchers(
+                                HttpMethod.GET,
+                                "/api/experience/**"
+                        ).permitAll()
+
+                        .requestMatchers(
+                                HttpMethod.GET,
+                                "/api/education/**"
+                        ).permitAll()
 
                         // Contact form
-                        .requestMatchers(HttpMethod.POST, "/api/contact").permitAll()
+                        .requestMatchers(
+                                HttpMethod.POST,
+                                "/api/contact"
+                        ).permitAll()
 
                         // Everything else requires authentication
                         .anyRequest().authenticated()
@@ -52,16 +70,16 @@ public class SecurityConfig {
         return http.build();
     }
 
-
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
 
-        CorsConfiguration configuration = new CorsConfiguration();
+        CorsConfiguration configuration =
+                new CorsConfiguration();
 
         configuration.setAllowedOrigins(List.of(
                 "http://localhost:3000",
                 "http://localhost:5173",
-                "https://my-portfolio-kohl-delta-20.vercel.app/#"
+                "https://my-portfolio-kohl-delta-20.vercel.app"
         ));
 
         configuration.setAllowedMethods(List.of(
@@ -83,7 +101,10 @@ public class SecurityConfig {
         UrlBasedCorsConfigurationSource source =
                 new UrlBasedCorsConfigurationSource();
 
-        source.registerCorsConfiguration("/**", configuration);
+        source.registerCorsConfiguration(
+                "/**",
+                configuration
+        );
 
         return source;
     }
