@@ -1,4 +1,4 @@
-package com.portfolio.my.portfolio.DTO;
+package com.portfolio.my.Portfolio.DTO;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
