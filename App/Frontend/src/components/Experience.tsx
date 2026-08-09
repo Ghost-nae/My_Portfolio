@@ -20,6 +20,7 @@ const experiences = [
     color: '#5b8af5',
     responsibilities: [
       'Manual and Functional Testing',
+      'Automation Testing',
       'Regression Testing across application releases',
       'API Testing using Postman',
       'Test Case Design and documentation',
