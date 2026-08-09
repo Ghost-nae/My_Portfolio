@@ -1,2 +1,38 @@
 package com.portfolio.my.Portfolio.Controller;
 
+import com.portfolio.my.Portfolio.DTO.ContactRequest;
+import com.portfolio.my.Portfolio.Service.ContactService;
+import jakarta.mail.MessagingException;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/contact")
+@RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:4200")
+public class ContactController {
+
+    private final ContactService contactService;
+
+    @PostMapping
+    public ResponseEntity<String> sendMessage(
+            @Valid @RequestBody ContactRequest request
+    ) {
+
+        try {
+
+            contactService.sendContactEmail(request);
+
+            return ResponseEntity.ok(
+                    "Message sent successfully"
+            );
+
+        } catch (MessagingException e) {
+
+            return ResponseEntity.internalServerError()
+                    .body("Failed to send message");
+        }
+    }
+}
