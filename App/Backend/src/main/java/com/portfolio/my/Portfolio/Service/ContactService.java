@@ -67,6 +67,7 @@ public class ContactService {
         CreateEmailOptions params = CreateEmailOptions.builder()
                 .from(fromEmail)
                 .to(toEmail)
+                .replyTo(request.getEmail())
                 .subject("Portfolio Contact: " + request.getSubject())
                 .html(emailBody)
                 .build();
