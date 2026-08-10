@@ -64,7 +64,7 @@ public class SecurityConfig {
                         ).permitAll()
 
                         // Everything else requires authentication
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 );
 
         return http.build();
