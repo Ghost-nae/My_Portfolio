@@ -15,32 +15,25 @@ public class ContactController {
 
     private final ContactService contactService;
 
-   @PostMapping
-public ResponseEntity<String> sendMessage(
-        @Valid @RequestBody ContactRequest request
-) {
-
-    try {
-
-        contactService.processContactMessage(request);
-
-        return ResponseEntity.ok(
-                "Message sent successfully"
-        );
-
-    } catch (MessagingException e) {
-
-        e.printStackTrace();
-
-        return ResponseEntity.internalServerError()
-                .body("Failed to send message: " + e.getMessage());
-
-    } catch (Exception e) {
-
-        e.printStackTrace();
-
-        return ResponseEntity.internalServerError()
-                .body("Unexpected error: " + e.getMessage());
+    @PostMapping
+    public ResponseEntity<String> sendMessage(
+            @Valid @RequestBody ContactRequest request
+    ) {
+    
+        try {
+    
+            contactService.processContactMessage(request);
+    
+            return ResponseEntity.ok(
+                    "Message sent successfully"
+            );
+    
+        } catch (Exception e) {
+    
+            e.printStackTrace();
+    
+            return ResponseEntity.internalServerError()
+                    .body("Failed to send message: " + e.getMessage());
+        }
     }
-}
 }
