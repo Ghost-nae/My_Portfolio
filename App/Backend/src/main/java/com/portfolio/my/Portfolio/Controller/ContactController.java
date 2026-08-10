@@ -2,7 +2,6 @@ package com.portfolio.my.Portfolio.Controller;
 
 import com.portfolio.my.Portfolio.DTO.ContactRequest;
 import com.portfolio.my.Portfolio.Service.ContactService;
-import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
