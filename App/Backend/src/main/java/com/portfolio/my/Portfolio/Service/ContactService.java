@@ -45,42 +45,42 @@ public class ContactService {
 
     private void sendEmail(ContactRequest request) {
 
-    Resend resend = new Resend(resendApiKey);
-
-    String emailBody = """
-            <h2>New message from your portfolio website</h2>
-
-            <p><strong>Name:</strong> %s</p>
-            <p><strong>Email:</strong> %s</p>
-            <p><strong>Subject:</strong> %s</p>
-
-            <h3>Message</h3>
-
-            <p>%s</p>
-            """.formatted(
-            request.getFullName(),
-            request.getEmail(),
-            request.getSubject(),
-            request.getMessage()
-    );
-
-    CreateEmailOptions params = CreateEmailOptions.builder()
-            .from(fromEmail)
-            .to(toEmail)
-            .subject("Portfolio Contact: " + request.getSubject())
-            .html(emailBody)
-            .build();
-
-    try {
-
-        resend.emails().send(params);
-
-    } catch (ResendException e) {
-
-        throw new RuntimeException(
-                "Failed to send contact email",
-                e
+        Resend resend = new Resend(resendApiKey);
+    
+        String emailBody = """
+                <h2>New message from your portfolio website</h2>
+    
+                <p><strong>Name:</strong> %s</p>
+                <p><strong>Email:</strong> %s</p>
+                <p><strong>Subject:</strong> %s</p>
+    
+                <h3>Message</h3>
+    
+                <p>%s</p>
+                """.formatted(
+                request.getFullName(),
+                request.getEmail(),
+                request.getSubject(),
+                request.getMessage()
         );
+    
+        CreateEmailOptions params = CreateEmailOptions.builder()
+                .from(fromEmail)
+                .to(toEmail)
+                .subject("Portfolio Contact: " + request.getSubject())
+                .html(emailBody)
+                .build();
+    
+        try {
+    
+            resend.emails().send(params);
+    
+        } catch (ResendException e) {
+    
+            throw new RuntimeException(
+                    "Failed to send contact email",
+                    e
+            );
+        }
     }
-}
 }
