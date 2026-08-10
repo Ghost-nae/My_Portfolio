@@ -72,9 +72,15 @@ public class ContactService {
             .build();
 
     try {
+
         resend.emails().send(params);
+
     } catch (ResendException e) {
-        throw new RuntimeException("Failed to send contact email", e);
+
+        throw new RuntimeException(
+                "Failed to send contact email",
+                e
+        );
     }
 }
 }
