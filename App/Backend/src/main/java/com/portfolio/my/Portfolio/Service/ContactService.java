@@ -8,7 +8,7 @@ import com.resend.services.emails.model.CreateEmailOptions;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
+import com.resend.core.exception.ResendException;
 import java.time.LocalDateTime;
 
 @Service
@@ -45,32 +45,36 @@ public class ContactService {
 
     private void sendEmail(ContactRequest request) {
 
-        Resend resend = new Resend(resendApiKey);
+    Resend resend = new Resend(resendApiKey);
 
-        String emailBody = """
-                <h2>New message from your portfolio website</h2>
+    String emailBody = """
+            <h2>New message from your portfolio website</h2>
 
-                <p><strong>Name:</strong> %s</p>
-                <p><strong>Email:</strong> %s</p>
-                <p><strong>Subject:</strong> %s</p>
+            <p><strong>Name:</strong> %s</p>
+            <p><strong>Email:</strong> %s</p>
+            <p><strong>Subject:</strong> %s</p>
 
-                <h3>Message</h3>
+            <h3>Message</h3>
 
-                <p>%s</p>
-                """.formatted(
-                request.getFullName(),
-                request.getEmail(),
-                request.getSubject(),
-                request.getMessage()
-        );
+            <p>%s</p>
+            """.formatted(
+            request.getFullName(),
+            request.getEmail(),
+            request.getSubject(),
+            request.getMessage()
+    );
 
-        CreateEmailOptions params = CreateEmailOptions.builder()
-                .from(fromEmail)
-                .to(toEmail)
-                .subject("Portfolio Contact: " + request.getSubject())
-                .html(emailBody)
-                .build();
+    CreateEmailOptions params = CreateEmailOptions.builder()
+            .from(fromEmail)
+            .to(toEmail)
+            .subject("Portfolio Contact: " + request.getSubject())
+            .html(emailBody)
+            .build();
 
+    try {
         resend.emails().send(params);
+    } catch (ResendException e) {
+        throw new RuntimeException("Failed to send contact email", e);
     }
+}
 }
