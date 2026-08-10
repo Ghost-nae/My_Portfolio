@@ -3,12 +3,10 @@ package com.portfolio.my.Portfolio.Service;
 import com.portfolio.my.Portfolio.DTO.ContactRequest;
 import com.portfolio.my.Portfolio.Models.ContactMessage;
 import com.portfolio.my.Portfolio.Repository.ContactMessageRepository;
-import jakarta.mail.MessagingException;
-import jakarta.mail.internet.MimeMessage;
+import com.resend.Resend;
+import com.resend.services.emails.model.CreateEmailOptions;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -18,13 +16,17 @@ import java.time.LocalDateTime;
 public class ContactService {
 
     private final ContactMessageRepository contactMessageRepository;
-    private final JavaMailSender mailSender;
 
-    @Value("${spring.mail.username}")
-    private String recipientEmail;
+    @Value("${resend.api-key}")
+    private String resendApiKey;
 
-    public void processContactMessage(ContactRequest request)
-            throws MessagingException {
+    @Value("${resend.from-email}")
+    private String fromEmail;
+
+    @Value("${resend.to-email}")
+    private String toEmail;
+
+    public void processContactMessage(ContactRequest request) {
 
         // Save message to database
         ContactMessage contactMessage = new ContactMessage();
@@ -41,34 +43,20 @@ public class ContactService {
         sendEmail(request);
     }
 
-    private void sendEmail(ContactRequest request)
-            throws MessagingException {
+    private void sendEmail(ContactRequest request) {
 
-        MimeMessage mimeMessage = mailSender.createMimeMessage();
-
-        MimeMessageHelper helper = new MimeMessageHelper(
-                mimeMessage,
-                false,
-                "UTF-8"
-        );
-
-        helper.setTo(recipientEmail);
-
-        helper.setReplyTo(request.getEmail());
-
-        helper.setSubject(
-                "Portfolio Contact: " + request.getSubject()
-        );
+        Resend resend = new Resend(resendApiKey);
 
         String emailBody = """
-                New message from your portfolio website
+                <h2>New message from your portfolio website</h2>
 
-                Name: %s
-                Email: %s
-                Subject: %s
+                <p><strong>Name:</strong> %s</p>
+                <p><strong>Email:</strong> %s</p>
+                <p><strong>Subject:</strong> %s</p>
 
-                Message:
-                %s
+                <h3>Message</h3>
+
+                <p>%s</p>
                 """.formatted(
                 request.getFullName(),
                 request.getEmail(),
@@ -76,8 +64,13 @@ public class ContactService {
                 request.getMessage()
         );
 
-        helper.setText(emailBody);
+        CreateEmailOptions params = CreateEmailOptions.builder()
+                .from(fromEmail)
+                .to(toEmail)
+                .subject("Portfolio Contact: " + request.getSubject())
+                .html(emailBody)
+                .build();
 
-        mailSender.send(mimeMessage);
+        resend.emails().send(params);
     }
 }
