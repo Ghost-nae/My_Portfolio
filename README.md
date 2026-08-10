@@ -2,17 +2,19 @@
 
 A modern full-stack developer portfolio built with **React, TypeScript, Spring Boot, PostgreSQL, and Resend**.
 
-The portfolio showcases my technical skills, projects, professional experience, and provides a functional contact system that allows visitors to send messages directly from the website.
+The portfolio showcases my technical skills, projects, professional experience, and provides a fully functional contact system that allows visitors to send messages directly from the website.
 
 ---
 
 ## Live Application
 
 ### Frontend
-https://my-portfolio-kohl-delta-20.vercel.app
+
+[View Live Portfolio](https://my-portfolio-kohl-delta-20.vercel.app)
 
 ### Backend API
-https://my-portfolio-backend-lxkw.onrender.com
+
+[View Backend API](https://my-portfolio-backend-lxkw.onrender.com)
 
 ---
 
@@ -43,14 +45,14 @@ Visitors can submit:
 
 The submission is sent to the Spring Boot backend where it is:
 
-1. Validated
+1. Validated using Jakarta Bean Validation
 2. Persisted in PostgreSQL
 3. Sent to my inbox using the Resend Email API
-4. Configured with the sender's email as the reply-to address
+4. Configured with the sender's email as the `Reply-To` address
 
-This allows me to reply directly to the person who contacted me from my email client.
+This allows me to reply directly to the person who submitted the message from my email client.
 
-### Example Flow
+### Contact Flow
 
 ```text
 Visitor
