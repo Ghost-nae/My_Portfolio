@@ -48,27 +48,52 @@ export default function Contact() {
   const [sent, setSent] = useState(false)
   const [loading, setLoading] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-     try {
-        // TODO:
-        // POST /api/contact
-        // await fetch(...)
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault()
 
-        setSent(true)
+  setLoading(true)
 
-        setForm({
-            name: '',
-            email: '',
-            subject: '',
-            message: '',
-        })
+  try {
+    const response = await fetch(
+      'https://my-portfolio-backend-lxkw.onrender.com/api/contact',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          fullName: form.name,
+          email: form.email,
+          subject: form.subject,
+          message: form.message,
+        }),
+      }
+    )
 
-        setTimeout(() => setSent(false), 4000)
-    } catch (error) {
-        console.error(error)
+    if (!response.ok) {
+      const errorMessage = await response.text()
+      throw new Error(errorMessage || 'Failed to send message')
     }
+
+    setSent(true)
+
+    setForm({
+      name: '',
+      email: '',
+      subject: '',
+      message: '',
+    })
+
+    setTimeout(() => setSent(false), 4000)
+
+  } catch (error) {
+    console.error('Contact form error:', error)
+    alert('Failed to send message. Please try again.')
+
+  } finally {
+    setLoading(false)
   }
+}
 
   return (
     <section id="contact" style={{ padding: '100px 48px', background: 'rgba(0,0,0,0.2)' }}>
